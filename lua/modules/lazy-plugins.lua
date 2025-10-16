@@ -69,6 +69,8 @@ require('lazy').setup({
   require 'plugins.mini',
   require 'plugins.treesitter',
 
+  require 'plugins.markdown-preview',
+
   -- require 'kickstart.plugins.lint',
   require 'plugins.autopairs',
   require 'plugins.neo-tree',

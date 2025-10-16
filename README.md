@@ -84,6 +84,11 @@ the current plugin status. Hit `q` to close the window.
 
 ### FAQ
 
+#### specific to goblin_mode
+* MarkdownPreview cmd won't work.
+    - Make sure npm and yarn are installed. Then navigate to `~/.local/share/nvim/lazy/markdown-preview.nvim/app` and run `npm install`
+
+#### from kickstart.nvim
 * What should I do if I already have a pre-existing Neovim configuration?
   * You should back it up and then delete all associated files.
   * This includes your existing init.lua and the Neovim files in `~/.local`
