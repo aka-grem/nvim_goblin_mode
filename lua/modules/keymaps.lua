@@ -40,20 +40,19 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- NOTE: Neotree
 vim.keymap.set('n', '<F2>', ':Neotree float<CR>', { desc = 'Open Neotree as a floating window' })
 
--- NOTE: Custom C# comment keymaps
--- TODO:  update to interact with lsp so that these work in all languages instead of just C#
-
+-- NOTE: Comment keymaps
 vim.keymap.set('n', '<leader>c', '', { desc = '[C]omment' })
 
 vim.keymap.set('n', '<leader>ct', '', { desc = '[C]omment [T]odo' })
-vim.keymap.set('n', '<leader>cte', ':execute "normal S// TODO: "<CR>A', { desc = '[C]omment [T]odo [E]mpty' })
-vim.keymap.set('n', '<leader>cti', ':execute "normal S// TODO: implement "<CR>', { desc = '[C]omment [T]odo [I]mplement' })
+vim.keymap.set('n', '<leader>cte', 'STODO: <Esc>:exe "normal" "gc0" <CR>A', { desc = '[C]omment [T]odo [E]mpty' })
+vim.keymap.set('n', '<leader>cti', 'STODO: implement<Esc>:exe "normal" "gc0" <CR>', { desc = '[C]omment [T]odo [I]mplement' })
+vim.keymap.set('n', '<leader>ctr', 'STODO: remove<Esc>:exe "normal" "gc0" <CR>', { desc = '[C]omment [T]odo [R]emove' })
 
-vim.keymap.set('n', '<leader>cn', ':execute "normal S// NOTE: "<CR>A', { desc = '[C]omment [N]ote' })
-vim.keymap.set('n', '<leader>cf', ':execute "normal S// FIX: "<CR>A', { desc = '[C]omment [F]ix' })
-vim.keymap.set('n', '<leader>cw', ':execute "normal S// WARNING: "<CR>A', { desc = '[C]omment [W]arning' })
-vim.keymap.set('n', '<leader>ch', ':execute "normal S// HACK: "<CR>A', { desc = '[C]omment [H]ack' })
-vim.keymap.set('n', '<leader>ce', ':execute "normal S// TEST: "<CR>A', { desc = '[C]omment [E]xperiment (Test)' })
+vim.keymap.set('n', '<leader>cn', 'SNOTE: <Esc>:exe "normal" "gc0" <CR>A', { desc = '[C]omment [N]ote' })
+vim.keymap.set('n', '<leader>cf', 'SFIX: <Esc>:exe "normal" "gc0" <CR>A', { desc = '[C]omment [F]ix' })
+vim.keymap.set('n', '<leader>cw', 'SWARNING: <Esc>:exe "normal" "gc0" <CR>A', { desc = '[C]omment [W]arning' })
+vim.keymap.set('n', '<leader>ch', 'SHACK: <Esc>:exe "normal" "gc0" <CR>A', { desc = '[C]omment [H]ack' })
+vim.keymap.set('n', '<leader>ce', 'STEST: <Esc>:exe "normal" "gc0" <CR>A', { desc = '[C]omment [E]xperiment (Test)' })
 
 -- NOTE: Godot keymaps
 vim.keymap.set('n', '<leader>g', '', { desc = '[G]odot' })
