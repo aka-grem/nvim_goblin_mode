@@ -122,7 +122,6 @@ vim.keymap.set('n', '<leader>pcfp', function()
 end, { desc = '[P]aste [C]urrent [F]ile [P]ath' })
 
 vim.keymap.set('n', '<leader>pcfd', '', { desc = '[P]aste [C]urrent [F]ile [D]irectory' })
-
 vim.keymap.set('n', '<leader>pcfdf', function()
   insert_after_cursor(vim.fn.fnamemodify(vim.fn.expand '%:p:h', ':p'))
 end, { desc = '[P]aste [C]urrent [F]ile [D]irectory [F]ull' })
@@ -132,6 +131,38 @@ end, { desc = '[P]aste [C]urrent [F]ile [D]irectory [R]elative' })
 vim.keymap.set('n', '<leader>pcfdi', function()
   insert_after_cursor(vim.fn.fnamemodify(vim.fn.expand '%:h', ':t'))
 end, { desc = '[P]aste [C]urrent [F]ile [D]irectory [I]mmediate' })
+
+-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
+
+-- NOTE: Useful C# keymaps
+
+local function get_csharp_namespace()
+  local path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)) -- current buffer path
+  local root = vim.fs.find(function(name)
+    return name:match '.*%.csproj$'
+  end, { upward = true, type = 'file', path = path })[1]
+  if root then
+    local relative_path = vim.fs.relpath(vim.fs.dirname(root), path)
+    local project_name = vim.fs.basename(root):match '^(.*)%.%w+$'
+    local namespace_path = project_name .. '.' .. relative_path
+    local namespace = namespace_path:gsub('%/', '%.')
+    return namespace
+  end
+  return nil
+end
+
+local function replace_line_with_csharp_namespace_declaration()
+  local namespace = get_csharp_namespace()
+  local namespace_declaration = 'namespace ' .. namespace .. ';'
+  vim.cmd 'normal S'
+  insert_after_cursor(namespace_declaration)
+end
+
+vim.keymap.set('n', '<leader>C', '', { desc = '[C]#' })
+vim.keymap.set('n', '<leader>Cn', '', { desc = '[C]# [N]amespace' })
+vim.keymap.set('n', '<leader>Cnd', replace_line_with_csharp_namespace_declaration, { desc = '[C]# [N]amespace [D]eclare' })
 
 -------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------
