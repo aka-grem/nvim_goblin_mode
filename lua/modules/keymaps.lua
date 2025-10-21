@@ -122,9 +122,13 @@ vim.keymap.set('n', '<leader>pcfp', function()
 end, { desc = '[P]aste [C]urrent [F]ile [P]ath' })
 
 vim.keymap.set('n', '<leader>pcfd', '', { desc = '[P]aste [C]urrent [F]ile [D]irectory' })
+
 vim.keymap.set('n', '<leader>pcfdf', function()
   insert_after_cursor(vim.fn.fnamemodify(vim.fn.expand '%:p:h', ':p'))
 end, { desc = '[P]aste [C]urrent [F]ile [D]irectory [F]ull' })
+vim.keymap.set('n', '<leader>pcfdr', function()
+  insert_after_cursor(vim.fn.expand '%:h')
+end, { desc = '[P]aste [C]urrent [F]ile [D]irectory [R]elative' })
 vim.keymap.set('n', '<leader>pcfdi', function()
   insert_after_cursor(vim.fn.fnamemodify(vim.fn.expand '%:h', ':t'))
 end, { desc = '[P]aste [C]urrent [F]ile [D]irectory [I]mmediate' })
