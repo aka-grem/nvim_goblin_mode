@@ -146,6 +146,9 @@ local function get_csharp_namespace()
   if root then
     local relative_path = vim.fs.relpath(vim.fs.dirname(root), path)
     local project_name = vim.fs.basename(root):match '^(.*)%.%w+$'
+    if relative_path == '.' then
+      return project_name
+    end
     local namespace_path = project_name .. '.' .. relative_path
     local namespace = namespace_path:gsub('%/', '%.')
     return namespace
@@ -160,9 +163,31 @@ local function replace_line_with_csharp_namespace_declaration()
   insert_after_cursor(namespace_declaration)
 end
 
+local function insert_csharp_class_template()
+  local file_name = vim.fn.expand '%:t'
+  local class_name = file_name:match '^(.+)%.cs$'
+  if not class_name then -- buffer must be a .cs file
+    print 'file must end in .cs T-T'
+    return
+  end
+
+  replace_line_with_csharp_namespace_declaration()
+
+  vim.cmd 'normal o'
+  insert_after_cursor('public class ' .. class_name)
+
+  vim.cmd 'normal o{'
+  vim.cmd 'normal ldlo'
+  insert_after_cursor('public ' .. class_name .. '() {}')
+  vim.cmd 'normal o}'
+  vim.cmd 'w'
+end
+
 vim.keymap.set('n', '<leader>C', '', { desc = '[C]#' })
 vim.keymap.set('n', '<leader>Cn', '', { desc = '[C]# [N]amespace' })
 vim.keymap.set('n', '<leader>Cnd', replace_line_with_csharp_namespace_declaration, { desc = '[C]# [N]amespace [D]eclare' })
+
+vim.keymap.set('n', '<leader>Cdc', insert_csharp_class_template, { desc = '[C]# [D]eclare [C]lass' })
 
 -------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------
