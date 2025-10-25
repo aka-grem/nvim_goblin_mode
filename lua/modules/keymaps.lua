@@ -203,6 +203,27 @@ local function insert_csharp_struct_template()
   vim.cmd 'w'
 end
 
+local function insert_csharp_interface_template()
+  local file_name = vim.fn.expand '%:t'
+  local interface_name = file_name:match '^(.+)%.cs$'
+  if not interface_name then -- buffer must be a .cs file
+    print 'file must end in .cs T-T'
+    return
+  end
+
+  replace_line_with_csharp_namespace_declaration()
+
+  vim.cmd 'normal o'
+  insert_after_cursor('public interface ' .. interface_name)
+
+  vim.cmd 'normal o{'
+  vim.cmd 'normal ldlo'
+  insert_after_cursor '// TODO: define'
+  vim.cmd 'normal o'
+  vim.cmd 'normal S}'
+  vim.cmd 'w'
+end
+
 local function insert_csharp_enum_template()
   local file_name = vim.fn.expand '%:t'
   local enum_name = file_name:match '^(.+)%.cs$'
@@ -229,6 +250,7 @@ vim.keymap.set('n', '<leader>Cn', '', { desc = '[C]# [N]amespace' })
 vim.keymap.set('n', '<leader>Cnd', replace_line_with_csharp_namespace_declaration, { desc = '[C]# [N]amespace [D]eclare' })
 
 vim.keymap.set('n', '<leader>Cd', '', { desc = '[C]# [D]eclare' })
+vim.keymap.set('n', '<leader>Cdi', insert_csharp_interface_template, { desc = '[C]# [D]eclare [I]nterface' })
 vim.keymap.set('n', '<leader>Cdc', insert_csharp_class_template, { desc = '[C]# [D]eclare [C]lass' })
 vim.keymap.set('n', '<leader>Cds', insert_csharp_struct_template, { desc = '[C]# [D]eclare [S]truct' })
 vim.keymap.set('n', '<leader>Cde', insert_csharp_enum_template, { desc = '[C]# [D]eclare [E]num' })
