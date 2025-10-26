@@ -137,6 +137,7 @@ end, { desc = '[P]aste [C]urrent [F]ile [D]irectory [I]mmediate' })
 -------------------------------------------------------------------------------------------------------------------------
 
 -- NOTE: Useful C# keymaps
+
 -- TODO: distinguish between inserting namespaces, classes, etc., replacing a file's contents with them, replacing a line, etc.
 
 local function get_csharp_namespace()
@@ -246,6 +247,16 @@ local function insert_csharp_enum_template()
   vim.cmd 'w'
 end
 
+local function insert_temp_method()
+  vim.cmd 'normal o'
+  vim.cmd 'normal o'
+  insert_after_cursor 'static void TEMP() {'
+  vim.cmd 'normal o'
+  vim.cmd 'normal o}'
+  vim.cmd 'normal o'
+  vim.cmd 'normal kkS'
+end
+
 vim.keymap.set('n', '<leader>C', '', { desc = '[C]#' })
 
 vim.keymap.set('n', '<leader>Cd', '', { desc = '[C]# [D]eclare' })
@@ -254,6 +265,10 @@ vim.keymap.set('n', '<leader>Cdi', insert_csharp_interface_template, { desc = '[
 vim.keymap.set('n', '<leader>Cdc', insert_csharp_class_template, { desc = '[C]# [D]eclare [C]lass' })
 vim.keymap.set('n', '<leader>Cds', insert_csharp_struct_template, { desc = '[C]# [D]eclare [S]truct' })
 vim.keymap.set('n', '<leader>Cde', insert_csharp_enum_template, { desc = '[C]# [D]eclare [E]num' })
+
+vim.keymap.set('n', '<leader>Ci', '', { desc = '[C]# [I]nsert' })
+vim.keymap.set('n', '<leader>Cit', '', { desc = '[C]# [I]nsert [T]emp' })
+vim.keymap.set('n', '<leader>Citm', insert_temp_method, { desc = '[C]# [I]nsert [T]emp [M]ethod' })
 
 -------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------
