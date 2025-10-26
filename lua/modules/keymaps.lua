@@ -135,11 +135,13 @@ end, { desc = '[P]aste [C]urrent [F]ile [D]irectory [I]mmediate' })
 -------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------
+-- TODO: rework the 'declare' keymap space into a programming language-agnostic system.
 
--- NOTE: Useful C# keymaps
+vim.keymap.set('n', '<leader>d', '', { desc = '[D]eclare' })
 
--- TODO: distinguish between inserting namespaces, classes, etc., replacing a file's contents with them, replacing a line, etc.
+-- NOTE: C#
 
+-- functions
 local function get_csharp_namespace()
   local path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)) -- current buffer path
   local root = vim.fs.find(function(name)
@@ -257,18 +259,16 @@ local function insert_temp_method()
   vim.cmd 'normal kkS'
 end
 
-vim.keymap.set('n', '<leader>C', '', { desc = '[C]#' })
+-- keymaps
+vim.keymap.set('n', '<leader>dc', '', { desc = '[D]eclare [C]#' })
 
-vim.keymap.set('n', '<leader>Cd', '', { desc = '[C]# [D]eclare' })
-vim.keymap.set('n', '<leader>Cdn', replace_line_with_csharp_namespace_declaration, { desc = '[C]# [D]eclare [N]amespace' })
-vim.keymap.set('n', '<leader>Cdi', insert_csharp_interface_template, { desc = '[C]# [D]eclare [I]nterface' })
-vim.keymap.set('n', '<leader>Cdc', insert_csharp_class_template, { desc = '[C]# [D]eclare [C]lass' })
-vim.keymap.set('n', '<leader>Cds', insert_csharp_struct_template, { desc = '[C]# [D]eclare [S]truct' })
-vim.keymap.set('n', '<leader>Cde', insert_csharp_enum_template, { desc = '[C]# [D]eclare [E]num' })
+vim.keymap.set('n', '<leader>dcn', replace_line_with_csharp_namespace_declaration, { desc = '[D]eclare [C]# [N]amespace' })
+vim.keymap.set('n', '<leader>dci', insert_csharp_interface_template, { desc = '[D]eclare [C]# [I]nterface' })
+vim.keymap.set('n', '<leader>dcc', insert_csharp_class_template, { desc = '[D]eclare [C]# [C]lass' })
+vim.keymap.set('n', '<leader>dcs', insert_csharp_struct_template, { desc = '[D]eclare [C]# [S]truct' })
+vim.keymap.set('n', '<leader>dce', insert_csharp_enum_template, { desc = '[D]eclare [C]# [E]num' })
 
-vim.keymap.set('n', '<leader>Ci', '', { desc = '[C]# [I]nsert' })
-vim.keymap.set('n', '<leader>Cit', '', { desc = '[C]# [I]nsert [T]emp' })
-vim.keymap.set('n', '<leader>Citm', insert_temp_method, { desc = '[C]# [I]nsert [T]emp [M]ethod' })
+vim.keymap.set('n', '<leader>dctm', insert_temp_method, { desc = '[D]eclare [C]# [T]emp [M]ethod' })
 
 -------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------
