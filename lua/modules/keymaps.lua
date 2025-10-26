@@ -268,6 +268,7 @@ vim.keymap.set('n', '<leader>dcc', insert_csharp_class_template, { desc = '[D]ec
 vim.keymap.set('n', '<leader>dcs', insert_csharp_struct_template, { desc = '[D]eclare [C]# [S]truct' })
 vim.keymap.set('n', '<leader>dce', insert_csharp_enum_template, { desc = '[D]eclare [C]# [E]num' })
 
+vim.keymap.set('n', '<leader>dct', '', { desc = '[D]eclare [C]# [T]emp' })
 vim.keymap.set('n', '<leader>dctm', insert_temp_method, { desc = '[D]eclare [C]# [T]emp [M]ethod' })
 
 -------------------------------------------------------------------------------------------------------------------------
