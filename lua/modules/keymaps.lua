@@ -137,6 +137,7 @@ end, { desc = '[P]aste [C]urrent [F]ile [D]irectory [I]mmediate' })
 -------------------------------------------------------------------------------------------------------------------------
 
 -- NOTE: Useful C# keymaps
+-- TODO: distinguish between inserting namespaces, classes, etc., replacing a file's contents with them, replacing a line, etc.
 
 local function get_csharp_namespace()
   local path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)) -- current buffer path
@@ -246,10 +247,9 @@ local function insert_csharp_enum_template()
 end
 
 vim.keymap.set('n', '<leader>C', '', { desc = '[C]#' })
-vim.keymap.set('n', '<leader>Cn', '', { desc = '[C]# [N]amespace' })
-vim.keymap.set('n', '<leader>Cnd', replace_line_with_csharp_namespace_declaration, { desc = '[C]# [N]amespace [D]eclare' })
 
 vim.keymap.set('n', '<leader>Cd', '', { desc = '[C]# [D]eclare' })
+vim.keymap.set('n', '<leader>Cdn', replace_line_with_csharp_namespace_declaration, { desc = '[C]# [D]eclare [N]amespace' })
 vim.keymap.set('n', '<leader>Cdi', insert_csharp_interface_template, { desc = '[C]# [D]eclare [I]nterface' })
 vim.keymap.set('n', '<leader>Cdc', insert_csharp_class_template, { desc = '[C]# [D]eclare [C]lass' })
 vim.keymap.set('n', '<leader>Cds', insert_csharp_struct_template, { desc = '[C]# [D]eclare [S]truct' })
